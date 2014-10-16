@@ -7,7 +7,7 @@ using namespace std;
 class Solution {
 public:
     int reverse(int x) {
-        unsigned int uret = 0;
+        int uret = 0;
 
         bool bBelow = false;
         if (x < 0) {
@@ -25,12 +25,12 @@ public:
 //        while (uret >  1 << 31)
 //            uret -=  1 << 31;
 
-        int ret = static_cast<int>(uret);
+//        int ret = static_cast<int>(uret);
 
         if (bBelow)
-            ret = -ret;
+            uret = -uret;
 
-        return ret;
+        return uret;
     }
 
     bool Test(int x, int result)
