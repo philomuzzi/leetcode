@@ -7,11 +7,7 @@ using namespace std;
 class Solution {
 public:
     int reverse(int x) {
-        if (!x)
-            return x;
-
-        if (x % 10 == x)
-            return x;
+        unsigned int uret = 0;
 
         bool bBelow = false;
         if (x < 0) {
@@ -19,26 +15,15 @@ public:
             x = -x;
         }
 
-        std::vector<int> ivec;
-        int z = 0;
-        while (x % 10 != x)
+        while (x)
         {
-            z = x % 10;
-            ivec.push_back(z);
+            uret = uret * 10 + x % 10;
             x = x / 10;
         }
 
-        ivec.push_back(x);
-
-        unsigned int uret = 0;
-        for (std::vector<int>::iterator iter = ivec.begin(); iter != ivec.end(); ++iter)
-        {
-            uret *= 10;
-            uret += *iter;
-        }
-
-        while (uret > 2<<30)
-            uret -= 2<<30;
+        // 一种效果不大的方法
+//        while (uret >  1 << 31)
+//            uret -=  1 << 31;
 
         int ret = static_cast<int>(uret);
 
@@ -65,7 +50,8 @@ int main()
     s.Test(-12345,-54321);
     s.Test(10000, 1);
     s.Test(10010, 1001);
-    s.Test(1000000003, 3000000001 - (2<<30));
+    s.Test(1000000003, 3000000001);
+    s.Test(1000000009, 9000000001);
     // 1000000009 && -1000000009呢
 
     return 0;
