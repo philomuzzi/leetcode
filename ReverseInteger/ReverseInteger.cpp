@@ -1,5 +1,8 @@
-#include <vector>
+﻿#include <vector>
 #include <cassert>
+#include <iostream>
+
+using namespace std;
 
 class Solution {
 public:
@@ -22,7 +25,7 @@ public:
         {
             z = x % 10;
             ivec.push_back(z);
-            x = x % 10;
+            x = x / 10;
         }
 
         ivec.push_back(x);
@@ -35,7 +38,7 @@ public:
         }
 
         if (uret > 2^31)
-            uret -= 2^31
+            uret -= 2^31;
 
         int ret = static_cast<int>(uret);
 
@@ -44,14 +47,25 @@ public:
 
         return ret;
     }
+
+    bool Test(int x, int result)
+    {
+        int y = reverse(x);
+        cout << x << result << y << endl;
+        assert(result == y);
+    }
 };
 
-void main()
+int main()
 {
     Solution s;
-    assert(1 == s.reverse(10000));
-    assert(9 == s.reverse(9));
-    assert(0 == s.reverse(0));
-    assert(-12345 == s.reverse(-54321));
-    assert(3000000001 - 2 ^ 31 == s.reverse(1000000003));
+    s.Test(9, 9);
+    s.Test(0, 0);
+    s.Test(12345, 54321);
+    s.Test(-12345,-54321);
+    s.Test(10000, 1);
+    s.Test(10010, 1001);
+    s.Test(1000000003, 3000000001 - 2^31);
+
+    return 0;
 }
