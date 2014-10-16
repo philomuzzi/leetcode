@@ -33,7 +33,7 @@ public:
         return uret;
     }
 
-    bool Test(int x, int result)
+    void Test(int x, int result)
     {
         int y = reverse(x);
         cout << x  <<"\t" << result <<"\t" << y << endl;
@@ -50,8 +50,9 @@ int main()
     s.Test(-12345,-54321);
     s.Test(10000, 1);
     s.Test(10010, 1001);
-    s.Test(1000000003, 3000000001);
-    s.Test(1000000009, 9000000001);
+    // 不同大小的数字要用不同的方式来消除warn
+    s.Test(1000000003, 3000000001ul);
+    s.Test(1000000009, static_cast<int>(9000000001));
     // 1000000009 && -1000000009呢
 
     return 0;
