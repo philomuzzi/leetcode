@@ -10,7 +10,7 @@ public:
         if (!x)
             return x;
 
-        if (x / 10 == x)
+        if (x % 10 == x)
             return x;
 
         bool bBelow = false;
@@ -21,7 +21,7 @@ public:
 
         std::vector<int> ivec;
         int z = 0;
-        while (x / 10 != x)
+        while (x % 10 != x)
         {
             z = x % 10;
             ivec.push_back(z);
@@ -37,8 +37,8 @@ public:
             uret += *iter;
         }
 
-        if (uret > 2^31)
-            uret -= 2^31;
+        while (uret > 2<<30)
+            uret -= 2<<30;
 
         int ret = static_cast<int>(uret);
 
@@ -51,7 +51,7 @@ public:
     bool Test(int x, int result)
     {
         int y = reverse(x);
-        cout << x << result << y << endl;
+        cout << x  <<"\t" << result <<"\t" << y << endl;
         assert(result == y);
     }
 };
@@ -65,7 +65,8 @@ int main()
     s.Test(-12345,-54321);
     s.Test(10000, 1);
     s.Test(10010, 1001);
-    s.Test(1000000003, 3000000001 - 2^31);
+    s.Test(1000000003, 3000000001 - (2<<30));
+    // 1000000009 && -1000000009呢
 
     return 0;
 }
