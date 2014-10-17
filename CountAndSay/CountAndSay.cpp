@@ -8,13 +8,15 @@ using namespace std;
 class Solution {
 public:
     string countAndSay(int n) {
-        char str[25];
-        sprintf(str, "%d", n);
-        string s(str);
-
-        if (n <= 0 || n == 1 )
+        string s = "0";
+        if (n <= 0)
             return s;
 
+        s = "1";
+        if (n == 1)
+            return s;
+
+        n -= 1;
         vector<pair<int, int> > pv;
         while(n)
         {
@@ -55,7 +57,7 @@ public:
 int main()
 {
     Solution s;
-    string rets = s.countAndSay(2);
+    string rets = s.countAndSay(10);
     cout << rets << endl;
     return 0;
 }
