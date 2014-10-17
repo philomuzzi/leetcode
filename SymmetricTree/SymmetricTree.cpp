@@ -1,4 +1,7 @@
 #include <cstdio>
+#include <queue>
+
+using std::queue;
 
 //Definition for binary tree
 struct TreeNode {
@@ -27,6 +30,47 @@ public:
             if (isSymmetricHelper(left->left, right->right) && isSymmetricHelper(left->right, right->left))
                 return true;
         }
+
+        return false;
+    }
+
+    bool isSymmetricIter(TreeNode *root) {
+        if (!root)
+            return true;
+
+        queue<TreeNode*> qa, qb;
+        qa.push(root->left);
+        qb.push(root->right);
+        TreeNode* p = qa.front();
+        TreeNode* q = qb.front();
+
+        while (!qa.empty() && !qb.empty())
+        {
+            qa.pop();
+            qb.pop();
+
+            if (!p && !q)
+            {
+                p = qa.front();
+                q = qb.front();
+                continue;
+            }
+            else if(p && q && p->val == q->val)
+            {
+                qa.push(p->left);
+                qa.push(p->right);
+                qb.push(q->right);
+                qb.push(q->left);
+            }
+            else
+                return false;
+
+            p = qa.front();
+            q = qb.front();
+        }
+
+        if (qa.empty() && qb.empty())
+            return true;
 
         return false;
     }
