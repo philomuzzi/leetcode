@@ -1,4 +1,4 @@
-dirs = ReverseInteger
+dirs = $(shell find . -name '*' -type d)
 
 all:
 	$(foreach N, $(dirs), make -C $(N);)
