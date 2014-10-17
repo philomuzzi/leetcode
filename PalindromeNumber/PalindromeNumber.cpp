@@ -21,7 +21,8 @@ public:
             t = t / 10;
         }
 
-        while (x / 10)
+        // x / 10 在1000021的情况下不能工作
+        while (x > 0)
         {
             if (x % 10 != x / l)
                 return false;
