@@ -19,6 +19,9 @@ public:
                 str.push_back(s[i]);
         }
 
+        if (str.size() == 0)
+            return true;
+
         for (size_t b = 0, e = str.size() - 1; b < e; ++b, --e)
         {
             if (tolower(str[b]) != tolower(str[e]))
@@ -42,6 +45,7 @@ int main()
     Solution s;
     s.Test("A man, a plan, a canal: Panama");
     s.Test("");
+    s.Test("  ");
     s.Test("race a car");
     s.Test("2");
     s.Test("C");
